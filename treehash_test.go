@@ -1,8 +1,8 @@
 package treehash
 
 import (
-	"io"
 	"fmt"
+	"io"
 	"testing"
 )
 

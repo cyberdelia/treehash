@@ -14,9 +14,9 @@ type digest struct {
 
 // New creates a new hash.Hash computing the Tree Hash checksum.
 func New() hash.Hash {
-	h := new(digest)
-	h.buffer = bytes.NewBuffer(nil)
-	return h
+	return &digest{
+		bytes.NewBuffer(nil),
+	}
 }
 
 func (d *digest) Size() int { return sha256.Size }
