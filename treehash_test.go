@@ -22,8 +22,8 @@ func BenchmarkTreeHash(b *testing.B) {
 		data[i] = uint8(i)
 	}
 	th := New()
+	b.SetBytes(int64(len(data)))
 	b.StartTimer()
-
 	for i := 0; i < b.N; i++ {
 		th.Reset()
 		th.Write(data)

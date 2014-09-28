@@ -9,13 +9,13 @@ import (
 const ChunkSize = 1024 * 1024
 
 type digest struct {
-	buffer *bytes.Buffer
+	buf *bytes.Buffer
 }
 
 // New creates a new hash.Hash computing the Tree Hash checksum.
 func New() hash.Hash {
 	return &digest{
-		bytes.NewBuffer(nil),
+		new(bytes.Buffer),
 	}
 }
 
@@ -24,7 +24,7 @@ func (d *digest) Size() int { return sha256.Size }
 func (d *digest) BlockSize() int { return sha256.BlockSize }
 
 func (d *digest) Reset() {
-	d.buffer = bytes.NewBuffer(nil)
+	d.buf = new(bytes.Buffer)
 }
 
 func chunk(buffer *bytes.Buffer) [][]byte {
@@ -74,11 +74,10 @@ func compute(chunks [][]byte) []byte {
 }
 
 func (d *digest) Sum(in []byte) []byte {
-	chunks := chunk(d.buffer)
+	chunks := chunk(d.buf)
 	return compute(chunks)
 }
 
 func (d *digest) Write(p []byte) (n int, err error) {
-	d.buffer.Write(p)
-	return len(p), nil
+	return d.buf.Write(p)
 }
