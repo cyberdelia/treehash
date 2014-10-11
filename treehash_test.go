@@ -17,8 +17,8 @@ func TestTreeHash(t *testing.T) {
 
 func BenchmarkTreeHash(b *testing.B) {
 	b.StopTimer()
-	data := make([]uint8, ChunkSize*2)
-	for i := 0; i < ChunkSize*2; i++ {
+	data := make([]uint8, chunkSize*2)
+	for i := 0; i < chunkSize*2; i++ {
 		data[i] = uint8(i)
 	}
 	th := New()
