@@ -6,7 +6,7 @@ import (
 	"hash"
 )
 
-const ChunkSize = 1024 * 1024
+const chunkSize = 1024 * 1024
 
 type digest struct {
 	buf *bytes.Buffer
@@ -30,7 +30,7 @@ func (d *digest) Reset() {
 func chunk(buffer *bytes.Buffer) [][]byte {
 	sha := sha256.New()
 	chunks := [][]byte{}
-	chunk := make([]byte, ChunkSize)
+	chunk := make([]byte, chunkSize)
 	for {
 		read, err := buffer.Read(chunk)
 		if err != nil {
