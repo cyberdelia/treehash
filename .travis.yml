@@ -1,2 +1,0 @@
-language: go
-script: go test -bench=. -v github.com/cyberdelia/treehash
